@@ -45,11 +45,13 @@ with psycopg2.connect( **db_cfg ) as conn :
     with conn.cursor() as cur :
         # Get SHA256 hash of repo
         cur.execute('SELECT sha256 FROM sha256 WHERE url=%s AND rev=%s', (url, rev))
-        sha256 = cur.fetchone()[0]
+        sha256 = cur.fetchone()
         if sha256 is None :
             r      = subprocess.run(['nix-prefetch-git','--quiet',url,rev], stdout=subprocess.PIPE)
             sha256 = json.loads(r.stdout)['sha256']
             cur.execute('INSERT INTO sha256 VALUES (%s,%s,%s)', (url,rev,sha256))
+        else:
+            sha256 = sha256[0]
         # Execute shell with executable
         for _ in range(args.N) :
             with tempfile.NamedTemporaryFile() as tmp :

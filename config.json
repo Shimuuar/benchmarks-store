@@ -4,7 +4,9 @@
     "subdir"  : "mwc-random-bench",
     "exe"     : "mwc-bench",
     "commits" : {
-      "0.14.0.0" : "32167407256cddb60dc39c6680e08014fc2f00b4"
+      "0.14.0.0"       : "32167407256cddb60dc39c6680e08014fc2f00b4",
+      "perf/primitive" : "2afc45551ce3cbed1c93724b5ce3c0dd56ab6cf4",
+      "perf/storable"  : "00c5e3b16506701a797d57a96a33e7c76dc0846e"
     }
   }
 }
