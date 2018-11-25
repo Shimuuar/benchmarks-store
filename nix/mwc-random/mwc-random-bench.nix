@@ -14,7 +14,11 @@ mkDerivation {
     rev    = rev;
     sha256 = sha256;
   };
-  postUnpack = "sourceRoot+=/mwc-random-bench; echo source root reset to $sourceRoot";
+  postUnpack  = "sourceRoot+=/mwc-random-bench; echo source root reset to $sourceRoot";
+  postInstall = ''
+    install $(find -name mwc-bench -type f) $out/bin
+    '';
+
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [ base mwc-random ];

@@ -9,11 +9,14 @@ let
   lib = pkgs.haskell.lib;
   haskOverrides = {
     overrides = hsPkgNew: hsPkgOld: rec {
-      mwc-random       = lib.dontCheck (hsPkgOld.callPackage (import ./mwc-random.nix {inherit url rev sha256;}) {});
+      mwc-random       = hsPkgOld.callPackage
+        (import ./mwc-random.nix {inherit url rev sha256;}) {};
       mwc-random-bench =
         lib.doBenchmark (lib.dontCheck
-          (hsPkgOld.callPackage (import ./mwc-random-bench.nix {inherit url rev sha256;}) {})
-        );
+          (hsPkgOld.callPackage (import ./mwc-random-bench.nix {inherit url rev sha256;}) {}));
     };
   };
-in pkgs.haskellPackages.mwc-random-bench.env
+in pkgs.stdenv.mkDerivation {
+     name        = "shell";
+     buildInputs = [ pkgs.haskellPackages.mwc-random-bench ];
+   }
