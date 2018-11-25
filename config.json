@@ -1,0 +1,10 @@
+{
+  "mwc-random" : {
+    "url"     : "https://github.com/Shimuuar/mwc-random.git",
+    "subdir"  : "mwc-random-bench",
+    "exe"     : "mwc-bench",
+    "commits" : {
+      "0.14.0.0" : "32167407256cddb60dc39c6680e08014fc2f00b4"
+    }
+  }
+}
